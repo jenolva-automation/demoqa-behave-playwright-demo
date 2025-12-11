@@ -1,6 +1,8 @@
 #Python Artifacts
-__pycache__/*.py[cod]
+__pycache__/
+*.py[cod]
 *.pyo
+*.pyc
 
 #Virtual Environments
 venv/
