@@ -1,0 +1,26 @@
+#Python Artifacts
+__pycache__/*.py[cod]
+*.pyo
+
+#Virtual Environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+#IDE Files
+.vscode/*
+!.vscode/settings.json
+
+#Logs
+*.Logs
+
+#Feature
+screenshots/
+artifacts/
+
+#Reports
+allure-report/
+allure-results/
+reports/

@@ -1,0 +1,9 @@
+{
+    "python.defaultInterpreterPath": "./venv/Scripts/python.exe",
+    "files.associations": {
+        "*.feature": "cucumber"
+    },
+    "behave-vsc.featuresPath": "./features",
+    "behave-vsc.stepsPath": "./features/steps",
+    "behave-vsc.pythonPath": "python"
+}
