@@ -1,0 +1,4 @@
+behave
+allure-behave
+allure-python-commons
+playwright
