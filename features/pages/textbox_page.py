@@ -4,7 +4,7 @@ from playwright.sync_api import expect
 class TextBoxPage:
     def __init__(self, page: Page):
         self.page = page
-        self.textbox_text = page.get_by_text("Text Box")
+        self.textbox_text = page.get_by_role("heading", name="Text Box")
         self.fullName_text = page.get_by_text("Full Name")
         self.fullName_textbox = page.get_by_role("textbox", name="Full Name")
         self.email_text = page.get_by_text("Email")
@@ -13,7 +13,13 @@ class TextBoxPage:
         self.currentAaddress_textbox = page.get_by_role("textbox", name="Current Address")
         self.permanentAddress_text = page.get_by_text("Permanent Address")
         self.permanentAddress_textbox = page.locator("#permanentAddress")
+        
         self.submit_button = page.get_by_role("button", name="Submit")
+        
+        self.fullName_output = page.locator("#name")
+        self.email_output = page.locator("#email")
+        self.output = page.locator("#output")
+           
         
     def textbox_text_assert_visible(self) -> bool:
         return expect(self.textbox_text).to_be_visible()
@@ -65,3 +71,17 @@ class TextBoxPage:
         
     def email_textbox_assert_empty(self):
         return expect(self.email_textbox).to_be_empty()
+    
+    
+    def fullName_output_assert_contains_text(self, fullName: str):
+        expect (self.fullName_output).to_contain_text(f"Name:{fullName}")
+        
+    def email_output_assert_contains_text(self, email: str):
+        expect (self.email_output).to_contain_text(f"Email:{email}")
+        
+    def currentAddress_output_assert_contains_text(self, currentAddress: str):
+        expect(self.output).to_contain_text(f"Current Address :{currentAddress}")
+    
+    def permanentAddress_output_assert_contains_text(self, permanentAddress: str):
+        expect(self.output).to_contain_text(f"Permanent Address :{permanentAddress}")
+
