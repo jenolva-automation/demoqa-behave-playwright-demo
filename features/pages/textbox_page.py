@@ -79,7 +79,9 @@ class TextBoxPage:
     def email_output_assert_contains_text(self, email: str):
         expect (self.email_output).to_contain_text(f"Email:{email}")
         
-    def output_assert_contains_text(self, currentAddress: str, permanentAddress: str):
-        expect (self.output).to_contain_text(f"Current Address :{currentAddress}")
-        expect (self.output).to_contain_text(f"Permananet Address :{permanentAddress}")
+    def currentAddress_output_assert_contains_text(self, currentAddress: str):
+        expect(self.output).to_contain_text(f"Current Address :{currentAddress}")
+    
+    def permanentAddress_output_assert_contains_text(self, permanentAddress: str):
+        expect(self.output).to_contain_text(f"Permanent Address :{permanentAddress}")
 

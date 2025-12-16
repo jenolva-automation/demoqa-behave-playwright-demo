@@ -12,8 +12,10 @@ def step_click_elements_text(context):
 @when('the user clicks on Text Box text')
 def step_click_text_box_text(context):
     print("Clicking on Text Box text")
-    # Simple implementation for testing
-    context.page.get_by_text("Text Box").click()
+    
+    elementsPage = ElementsPage(context.page)
+    elementsPage.textBox_listitem_assert_visible()
+    elementsPage.click_textBox_listitem()
 
 @then('the form text, textbox fields and submit button be visible')
 def step_expect_form_fields_visible(context):
@@ -92,10 +94,10 @@ def step_verify_email_output(context, email):
 def step_verify_currentAddress_output(context, currentAddress):
     print("Verifying Current Address output")
     textboxPage = TextBoxPage(context.page)
-    textboxPage.output_assert_contains_text(currentAddress, "")
+    textboxPage.currentAddress_output_assert_contains_text(currentAddress)
     
 @then('the entered permanent address: "{permanentAddress}" in textbox should be displayed in the output')
 def step_verify_permanentAddress_output(context, permanentAddress): 
     print("Verifying Permanent Address output")
     textboxPage = TextBoxPage(context.page)
-    textboxPage.output_assert_contains_text("", permanentAddress)
+    textboxPage.permanentAddress_output_assert_contains_text(permanentAddress)
