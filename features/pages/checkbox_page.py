@@ -13,14 +13,9 @@ class CheckBoxPage:
         self.home_text = "Home"
         self.documents_text = "Documents"
         
-        self.label_tree = {
-            "Desktop": ["Notes", "Commands"],
-            "Documents": {
-                "WorkSpace": ["React", "Angular", "Veu"],
-                "Office": ["Public", "Private", "Classified", "General"]                
-            }#,
-#            "Downloads": ["WordFile", "ExcelFile"]
-        }
+        
+        
+        self.results_list = page.locator("#result .text-success")
         
         
     def checkBox_text_assert_visible(self):
@@ -109,6 +104,12 @@ class CheckBoxPage:
     def assert_text_visible_tree(self):
         """Recursively assert that all texts in the tree structure are visible"""
         self.assert_text_visible_recursive(self.label_tree)
+        
+    def get_result_listed_items(self) -> list:    
+        """Get a list of items displayed in the results section"""
+        selected = self.results_list.all_text_contents()
+        return selected
+        
     
     def assert_text_visible_recursive(self, tree_dict):
         """Helper method to recursively assert text visibility"""
@@ -122,3 +123,48 @@ class CheckBoxPage:
                 # It's a nested dictionary
                 self.assert_text_visible(key)  # Assert parent node
                 self.assert_text_visible_recursive(value)  # Recurse into children
+                
+    def tree_to_list(self, node, result=None) -> list:
+        if result is None:
+            result = []
+
+        if isinstance(node, dict):
+            for key, value in node.items():
+                result.append(key)              # add the key
+                self.tree_to_list(value, result)     # recurse into the value
+
+        elif isinstance(node, list):
+            for item in node:
+                result.append(item)             # add list items
+
+        print(f"***Current flattened list: {result}")
+        return result
+
+    def selectedKeys_to_list(self, tree, selected_keys: list) -> list:
+        result = []
+    
+        def extract_all_strings(node, include_key=None):
+            # Add the key itself if specified
+            if include_key:
+                result.append(include_key)
+                
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    result.append(key)  # Add the key
+                    extract_all_strings(value)  # Recurse into the value
+                    
+            elif isinstance(node, list):
+                for item in node:
+                    if isinstance(item, str):
+                        result.append(item)  # Add string items
+                    else:
+                        extract_all_strings(item)  # Recurse if not string
+        
+        # Process each selected key
+        for selected_key in selected_keys:
+            if selected_key in tree:
+                extract_all_strings(tree[selected_key], include_key=selected_key)
+                print(f"***Processed selected key: {selected_key}")
+        
+        print(f"***Final result: {result}")
+        return result
