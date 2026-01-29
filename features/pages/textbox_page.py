@@ -4,7 +4,8 @@ from playwright.sync_api import expect
 class TextBoxPage:
     def __init__(self, page: Page):
         self.page = page
-        self.textbox_text = page.get_by_role("heading", name="Text Box")
+        
+        self.textBox_heading = page.get_by_role("heading", name="Text Box")
         self.fullName_text = page.get_by_text("Full Name")
         self.fullName_textbox = page.get_by_role("textbox", name="Full Name")
         self.email_text = page.get_by_text("Email")
@@ -22,10 +23,10 @@ class TextBoxPage:
            
         
     def textbox_text_assert_visible(self) -> bool:
-        return expect(self.textbox_text).to_be_visible()
+        return expect(self.textBox_heading).to_be_visible()
         
     def click_textbox_text(self):
-        self.textbox_text.click()    
+        self.textBox_heading.click()    
         
     def fullName_text_assert_visible(self) -> bool:
         return expect(self.fullName_text).to_be_visible()

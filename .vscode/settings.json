@@ -5,5 +5,12 @@
     },
     "behave-vsc.featuresPath": "./features",
     "behave-vsc.stepsPath": "./features/steps",
-    "behave-vsc.pythonPath": "python"
+    "behave-vsc.pythonPath": "python",
+    "cucumberautocomplete.steps": [
+        "features/steps/**/*.py"
+    ],
+    "cucumberautocomplete.syncfeatures": "features/**/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true
 }
